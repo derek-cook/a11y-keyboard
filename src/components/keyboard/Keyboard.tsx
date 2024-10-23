@@ -1,8 +1,9 @@
 "use client";
-import React, { type ReactNode } from "react";
+import React, { useState } from "react";
 import { cn } from "~/lib/utils";
 import { Button } from "../ui/button";
-import { Delete } from "lucide-react";
+import { Delete, MessageCircleMore } from "lucide-react";
+import { useLongPress } from "@uidotdev/usehooks";
 
 const qwertyLayout = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -18,33 +19,53 @@ const alphabeticalLayout = [
   ["U", "V", "W", "X", "Y", "Z"],
 ];
 
+const numbersAndSpecialCharsLayout = [
+  ["1", "2", "3", "4", "5"],
+  ["6", "7", "8", "9", "0"],
+  ["!", "?", "@", "$", "#", "&"],
+];
+
+const moreLayout = [
+  ["Tired", "Hungry", "Thirsty"],
+  ["Cold", "Hot", "Pain", "Bathroom"],
+  ["Yes", "No", "I don't know"],
+];
+
+const emojiLayout = [
+  ["😴", "🍽️", "🥤", "💊"],
+  ["🥶", "🥵", "😣", "🚽"],
+  ["✅", "❌", "🥰", "🪑"],
+];
+
+type Mode = "ALPHA" | "MORE" | "NUMERIC" | "EMOJI";
+const modes: Record<Mode, { layout: string[][] }> = {
+  ALPHA: {
+    layout: alphabeticalLayout,
+  },
+  MORE: {
+    layout: moreLayout,
+  },
+  NUMERIC: {
+    layout: numbersAndSpecialCharsLayout,
+  },
+  EMOJI: {
+    layout: emojiLayout,
+  },
+};
+
 type KeyboardProps = {
-  layout: "qwerty" | "alphabetical";
+  setText: (text: string) => void;
   appendText: (key: string) => void;
   backspace: () => void;
 };
 
-// const alphabeticalLayoutCols = (cols: number) => {
-//   const flattened = alphabeticalLayout.flat();
-//   const rows = [];
-//   for (let i = 0; i < flattened.length / cols; i++) {
-//     rows.push(flattened.slice(i * cols, i * cols + cols));
-//   }
-//   return rows;
-// };
-
-interface KeyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  keyValue: string;
-}
+interface KeyButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const KeyButton = ({ className = "", children, ...rest }: KeyButtonProps) => {
   return (
     <Button
-      className={cn(
-        "mx-1 h-full py-2 text-5xl font-extrabold",
-        "flex-1",
-        className,
-      )}
+      className={cn("h-36 py-2 text-5xl font-extrabold", "flex-1", className)}
       {...rest}
     >
       {children}
@@ -53,43 +74,63 @@ const KeyButton = ({ className = "", children, ...rest }: KeyButtonProps) => {
 };
 
 export const Keyboard: React.FC<KeyboardProps> = ({
-  layout,
+  setText,
   appendText,
   backspace,
 }) => {
-  const keyboardLayout =
-    layout === "qwerty" ? qwertyLayout : alphabeticalLayout;
+  const { onMouseDown, onMouseLeave, onMouseUp, onTouchEnd, onTouchStart } =
+    useLongPress(() => console.log("long press"));
+
+  const [mode, setMode] = useState<Mode>("ALPHA");
+
+  const { layout } = modes[mode];
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-3xl flex-col p-4">
-      {keyboardLayout.map((row, rowIndex) => (
-        <div key={rowIndex} className="mb-2 flex h-full justify-center">
+    <div className="mx-auto flex w-full max-w-3xl flex-col p-1 pt-0">
+      {layout.map((row, rowIndex) => (
+        <div key={rowIndex} className="mb-1 flex h-full justify-center gap-1">
           {row.map((keyValue) => (
-            <KeyButton
-              key={keyValue}
-              keyValue={keyValue}
-              onClick={() => appendText(keyValue)}
-            >
+            <KeyButton key={keyValue} onClick={() => appendText(keyValue)}>
               {keyValue}
             </KeyButton>
           ))}
         </div>
       ))}
-      <div className="mb-2 grid h-full grid-cols-6">
-        <KeyButton
-          className="col-span-4"
-          keyValue=" "
-          onClick={() => appendText(" ")}
-        >
-          {"Space"}
-        </KeyButton>
-        <KeyButton keyValue="." onClick={() => appendText(".")}>
-          {"."}
-        </KeyButton>
-        <KeyButton keyValue="backspace" onClick={() => backspace()}>
-          <Delete size={48} />
-        </KeyButton>
-      </div>
+      {mode === "EMOJI" ? (
+        <div className="grid h-full">
+          <KeyButton className="" onClick={() => setMode("ALPHA")}>
+            abc
+          </KeyButton>
+        </div>
+      ) : (
+        <div className="grid h-full grid-cols-6 gap-1">
+          <KeyButton onClick={() => setMode("EMOJI")}>
+            <MessageCircleMore size={48} />
+          </KeyButton>
+
+          {mode !== "ALPHA" && (
+            <KeyButton onClick={() => setMode("ALPHA")}>{"abc"}</KeyButton>
+          )}
+          {mode !== "NUMERIC" && (
+            <KeyButton onClick={() => setMode("NUMERIC")}>{"123"}</KeyButton>
+          )}
+          <KeyButton className="col-span-2" onClick={() => appendText(" ")}>
+            {"Space"}
+          </KeyButton>
+          <KeyButton onClick={() => appendText(".")}>{"."}</KeyButton>
+          <KeyButton
+            className="bg-destructive"
+            onClick={() => backspace()}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+            onMouseLeave={onMouseLeave}
+          >
+            <Delete size={48} />
+          </KeyButton>
+        </div>
+      )}
     </div>
   );
 };

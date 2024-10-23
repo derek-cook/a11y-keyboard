@@ -17,5 +17,5 @@ export const useText = () => {
     setText((prevText) => prevText.slice(0, prevText.length - 1));
   };
 
-  return { text, appendText, backspace } as const;
+  return { text, appendText, backspace, setText } as const;
 };
