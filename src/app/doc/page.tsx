@@ -1,11 +1,11 @@
 "use client";
-import { Keyboard } from "~/components/keyboard/Keyboard";
-import { TextContainer } from "~/components/keyboard/TextContainer";
+import { Keyboard } from "~/features/keyboard/Keyboard";
+import { TextContainer } from "~/features/keyboard/TextContainer";
 import { Button } from "~/components/ui/button";
-import { useText } from "~/lib/hooks/useText";
+import { useKeyboard } from "~/features/keyboard/KeyboardProvider";
 
 export default function DocumentContainer() {
-  const { text, appendText, backspace, setText } = useText();
+  const { text, setText } = useKeyboard();
 
   const handleSpeak = async () => {
     if (!text) return;
@@ -23,7 +23,7 @@ export default function DocumentContainer() {
     <div className="container flex h-dvh flex-col justify-between">
       <div className="grid grid-cols-5 gap-1 p-1">
         <div className="col-span-4">
-          <TextContainer text={text} setText={setText} />
+          <TextContainer />
         </div>
         <div id="editor-actions" className="flex flex-col gap-1">
           <Button
@@ -38,11 +38,7 @@ export default function DocumentContainer() {
           </Button>
         </div>
       </div>
-      <Keyboard
-        appendText={appendText}
-        backspace={backspace}
-        setText={setText}
-      />
+      <Keyboard />
     </div>
   );
 }

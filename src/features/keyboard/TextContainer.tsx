@@ -1,15 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "../../components/ui/textarea";
+import { useKeyboard } from "./KeyboardProvider";
 
-interface DocumentContainerProps {
-  text: string;
-  setText: (text: string) => void;
-}
-
-export const TextContainer: React.FC<DocumentContainerProps> = ({
-  text,
-  setText,
-}) => {
+export const TextContainer = () => {
+  const { text, setText } = useKeyboard();
   const textRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
