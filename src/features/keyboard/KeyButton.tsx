@@ -13,7 +13,7 @@ export const KeyButton = ({
 }: KeyButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <Button
-      className={cn("h-36 py-2 text-5xl font-extrabold", "flex-1", className)}
+      className={cn("h-full w-full py-2 text-5xl font-extrabold", className)}
       {...rest}
     >
       {children}
