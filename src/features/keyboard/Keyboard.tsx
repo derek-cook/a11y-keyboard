@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Delete, Speech } from "lucide-react";
+import { Delete, Space, Speech } from "lucide-react";
 import { KeyButton } from "./KeyButton";
 import { useKeyboard } from "./KeyboardProvider";
 
@@ -12,7 +12,7 @@ export const Keyboard = () => {
       {layout.map((row, rowIndex) => (
         <div
           key={rowIndex}
-          className="mb-1 flex h-full max-h-36 justify-center gap-1"
+          className="mb-1 flex h-full max-h-32 justify-center gap-1"
         >
           {row.map((keyData) => (
             <KeyButton
@@ -24,10 +24,10 @@ export const Keyboard = () => {
           ))}
         </div>
       ))}
-      <div className="grid h-full max-h-36 grid-cols-6 gap-1">
+      <div className="grid h-full max-h-32 grid-cols-6 gap-1">
         {mode === "EMOJI" ? (
           <KeyButton
-            className="col-span-full"
+            className="col-span-full text-3xl"
             text="abc"
             onClick={() => setMode("ALPHA")}
           />
@@ -39,6 +39,7 @@ export const Keyboard = () => {
 
             {mode !== "ALPHA" && (
               <KeyButton
+                className="text-3xl"
                 aria-label="toggle alphabet"
                 text="abc"
                 onClick={() => setMode("ALPHA")}
@@ -46,8 +47,9 @@ export const Keyboard = () => {
             )}
             {mode !== "NUMERIC" && (
               <KeyButton
-                aria-label="toggle numeric and special characters"
                 text="123"
+                className="text-3xl"
+                aria-label="toggle numeric and special characters"
                 onClick={() => setMode("NUMERIC")}
               />
             )}
@@ -55,7 +57,9 @@ export const Keyboard = () => {
               className="col-span-2"
               value=" "
               onClick={() => appendText(" ")}
-            />
+            >
+              <Space size={48} />
+            </KeyButton>
             <KeyButton text="." onClick={() => appendText(".")} />
             <KeyButton
               aria-label="backspace"

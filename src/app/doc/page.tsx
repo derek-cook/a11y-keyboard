@@ -21,19 +21,19 @@ export default function DocumentContainer() {
 
   return (
     <div className="container flex h-dvh flex-col justify-between">
-      <div className="grid grid-cols-5 gap-1 p-1">
-        <div className="col-span-4">
+      <div className="grid h-full max-h-48 grid-cols-5 gap-1 p-1">
+        <div className="col-span-4 h-full">
           <TextContainer />
         </div>
-        <div id="editor-actions" className="flex flex-col gap-1">
+        <div id="editor-actions" className="flex flex-col justify-start gap-1">
           <Button
             variant="destructive"
-            className="flex-1 text-3xl"
+            className="truncate text-2xl"
             onClick={() => setText("")}
           >
-            Clear all
+            Clear
           </Button>
-          <Button className="flex-1 text-3xl" onClick={handleSpeak}>
+          <Button className="truncate text-2xl" onClick={handleSpeak}>
             Speak
           </Button>
         </div>

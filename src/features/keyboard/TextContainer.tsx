@@ -15,7 +15,7 @@ export const TextContainer = () => {
 
   return (
     <Textarea
-      className="min-h-32 w-full resize-none overflow-y-auto p-4 text-5xl focus-visible:ring-0"
+      className="h-full w-full resize-none overflow-y-auto p-4 text-5xl focus-visible:ring-0"
       ref={textRef}
       value={text}
       onChange={(e) => setText(e.target.value)}
