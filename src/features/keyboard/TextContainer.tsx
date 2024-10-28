@@ -15,6 +15,7 @@ export const TextContainer = () => {
 
   return (
     <Textarea
+      inputMode="none"
       className="h-full w-full resize-none overflow-y-auto p-4 text-5xl focus-visible:ring-0"
       ref={textRef}
       value={text}
