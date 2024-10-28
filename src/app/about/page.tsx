@@ -5,7 +5,7 @@ import { Button } from "~/components/ui/button";
 export default function AboutPage() {
   return (
     <div className="container mx-auto flex min-h-screen w-full max-w-4xl flex-col items-center">
-      <nav className="mx-auto mb-4 flex w-full items-center justify-between p-6">
+      <nav className="mx-auto flex w-full items-center justify-between p-6">
         <div id="left-nav">
           <Link className="text-lg font-semibold text-blue-950" href="/">
             Keyboard
@@ -49,7 +49,7 @@ export default function AboutPage() {
           <p>
             This application is not meant to be a replacement to accessibility
             settings on your device. However, it aims to provide quick and
-            customized communication tools with little to no learning curve.
+            customized communication tools with minimal learning curve.
           </p>
         </div>
 

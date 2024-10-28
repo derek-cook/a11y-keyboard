@@ -40,15 +40,20 @@ import { Button } from "~/components/ui/button";
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
+      <SignedIn>
+        <div className="fixed right-3 top-3">
+          <UserButton />
+        </div>
+      </SignedIn>
       <div className="container flex max-w-lg flex-col gap-2">
-        <h1 className="mb-2 text-5xl">
+        <h1 className="mb-1 text-5xl">
           Intellitype
-          <span className="ml-4 rounded bg-gray-300 px-2 py-1 align-middle text-lg">
+          <span className="ml-4 rounded bg-blue-200 px-2 py-1 align-middle text-lg">
             beta
           </span>
         </h1>
-        <p className="mb-2 text-lg">A custom and accessible keyboard</p>
-        <div className="mt-3 flex gap-4">
+        <p className="mb-8 text-lg">A custom and accessible keyboard</p>
+        <div className="flex gap-4">
           <SignedIn>
             <Button asChild>
               <Link href="/keyboards">My keyboards</Link>
