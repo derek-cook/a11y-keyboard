@@ -3,9 +3,11 @@ import { Keyboard } from "~/features/keyboard/Keyboard";
 import { TextContainer } from "~/features/keyboard/TextContainer";
 import { Button } from "~/components/ui/button";
 import { useKeyboard } from "~/features/keyboard/KeyboardProvider";
+import { useRef } from "react";
 
 export default function DocumentContainer() {
   const { text, setText } = useKeyboard();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleSpeak = async () => {
     if (!text) return;
@@ -14,13 +16,17 @@ export default function DocumentContainer() {
         method: "POST",
         body: JSON.stringify({ text }),
       });
-      const audioBuffer = await res.arrayBuffer();
-      const audioContext = new AudioContext();
-      const decodedData = await audioContext.decodeAudioData(audioBuffer);
-      const source = audioContext.createBufferSource();
-      source.buffer = decodedData;
-      source.connect(audioContext.destination);
-      source.start(0);
+      const audioBlob = await res.blob();
+      // const audioBuffer = await res.arrayBuffer();
+      // const audioContext = new AudioContext();
+      // const decodedData = await audioContext.decodeAudioData(audioBuffer);
+      // const source = audioContext.createBufferSource();
+      // source.buffer = decodedData;
+      // source.connect(audioContext.destination);
+      // source.start(0);
+      const audioUrl = URL.createObjectURL(audioBlob);
+      audioRef.current!.src = audioUrl;
+      await audioRef.current?.play();
     } catch (error) {
       console.error("Failed to play audio:", error);
     }
@@ -45,6 +51,7 @@ export default function DocumentContainer() {
             className="truncate text-2xl"
             onClick={handleSpeak}
           >
+            <audio ref={audioRef} src="" />
             Speak
           </Button>
         </div>
