@@ -4,6 +4,8 @@ import { TextContainer } from "~/features/keyboard/TextContainer";
 import { Button } from "~/components/ui/button";
 import { useKeyboard } from "~/features/keyboard/KeyboardProvider";
 
+const audioContext = new AudioContext();
+
 export default function DocumentContainer() {
   const { text, setText } = useKeyboard();
 
@@ -14,10 +16,12 @@ export default function DocumentContainer() {
         method: "POST",
         body: JSON.stringify({ text }),
       });
-      const audioBlob = await res.blob();
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = new Audio(audioUrl);
-      await audio.play();
+      const audioBuffer = await res.arrayBuffer();
+      const decodedData = await audioContext.decodeAudioData(audioBuffer);
+      const source = audioContext.createBufferSource();
+      source.buffer = decodedData;
+      source.connect(audioContext.destination);
+      source.start(0);
     } catch (error) {
       console.error("Failed to play audio:", error);
     }
@@ -40,21 +44,7 @@ export default function DocumentContainer() {
           <Button
             value={text}
             className="truncate text-2xl"
-            onClick={async () => {
-              if (!text) return;
-              try {
-                const res = await fetch("/api/text-to-speech", {
-                  method: "POST",
-                  body: JSON.stringify({ text }),
-                });
-                const audioBlob = await res.blob();
-                const audioUrl = URL.createObjectURL(audioBlob);
-                const audio = new Audio(audioUrl);
-                await audio.play();
-              } catch (error) {
-                console.error("Failed to play audio:", error);
-              }
-            }}
+            onClick={handleSpeak}
           >
             Speak
           </Button>
