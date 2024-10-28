@@ -48,7 +48,7 @@ export default function HomePage() {
       <div className="container flex max-w-lg flex-col gap-2">
         <h1 className="mb-1 text-5xl">
           Intellitype
-          <span className="ml-4 rounded bg-blue-200 px-2 py-1 align-middle text-lg">
+          <span className="ml-4 rounded-full bg-blue-200 px-3 py-1 align-middle text-lg">
             beta
           </span>
         </h1>

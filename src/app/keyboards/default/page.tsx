@@ -9,14 +9,18 @@ export default function DocumentContainer() {
 
   const handleSpeak = async () => {
     if (!text) return;
-    const res = await fetch("/api/text-to-speech", {
-      method: "POST",
-      body: JSON.stringify({ text }),
-    });
-    const audioBlob = await res.blob();
-    const audioUrl = URL.createObjectURL(audioBlob);
-    const audio = new Audio(audioUrl);
-    audio.play();
+    try {
+      const res = await fetch("/api/text-to-speech", {
+        method: "POST",
+        body: JSON.stringify({ text }),
+      });
+      const audioBlob = await res.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      await audio.play();
+    } catch (error) {
+      console.error("Failed to play audio:", error);
+    }
   };
 
   return (

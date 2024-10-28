@@ -19,7 +19,7 @@ export const Keyboard = () => {
               key={keyData.text}
               text={keyData.text}
               value={keyData.value}
-              onClick={() => appendText(keyData.value || "")}
+              onClick={() => appendText(keyData.value ?? "")}
             />
           ))}
         </div>

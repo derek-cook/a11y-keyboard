@@ -1,9 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import "~/styles/globals.css";
-
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { KeyboardProvider } from "~/features/keyboard/KeyboardProvider";
 
 export const metadata: Metadata = {
   title: "Keyboard Home",

@@ -1,4 +1,4 @@
-import { KeyButtonData } from "./types";
+import type { KeyButtonData } from "./types";
 
 export const qwertyLayout = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],

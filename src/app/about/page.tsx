@@ -35,7 +35,7 @@ export default function AboutPage() {
             Consider iOS has Accessibility Options. Although very powerful, it
             has a steep learning curve and may take some time to onboard. It
             also targets broad disabilities which may not be helpful for
-            specific users' conditions.
+            specific users&apos; conditions.
           </p>
           <p>
             The devices and software for more specific conditions are often

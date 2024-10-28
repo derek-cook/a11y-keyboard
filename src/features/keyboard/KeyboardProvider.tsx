@@ -1,9 +1,10 @@
 "use client";
 import { createContext, useContext, useState } from "react";
-import { Mode, modes } from "./constants";
+import type { Mode } from "./constants";
+import { modes } from "./constants";
 import { capitalizeFirstLetterOfSentences } from "~/lib/textTransformers";
 import { pipe } from "~/lib/utils";
-import { KeyButtonData } from "./types";
+import type { KeyButtonData } from "./types";
 
 type KeyboardContext = {
   text: string;
@@ -15,17 +16,7 @@ type KeyboardContext = {
   backspace: () => void;
 };
 
-const defaultContext: KeyboardContext = {
-  text: "",
-  setText: () => {},
-  mode: "ALPHA",
-  setMode: () => {},
-  layout: [],
-  appendText: () => {},
-  backspace: () => {},
-};
-
-export const Context = createContext<KeyboardContext>(defaultContext);
+export const Context = createContext<KeyboardContext | null>(null);
 
 export const KeyboardProvider = ({
   children,
@@ -69,7 +60,7 @@ Context.displayName = "KeyboardContext";
 
 export const useKeyboard = () => {
   const context = useContext(Context);
-  if (context === undefined) {
+  if (context === null) {
     throw new Error(
       "useKeyboardContext must be used within a KeyboardProvider",
     );
