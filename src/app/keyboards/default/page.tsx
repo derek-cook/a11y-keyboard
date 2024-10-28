@@ -37,7 +37,25 @@ export default function DocumentContainer() {
           >
             Clear
           </Button>
-          <Button className="truncate text-2xl" onClick={handleSpeak}>
+          <Button
+            value={text}
+            className="truncate text-2xl"
+            onClick={async () => {
+              if (!text) return;
+              try {
+                const res = await fetch("/api/text-to-speech", {
+                  method: "POST",
+                  body: JSON.stringify({ text }),
+                });
+                const audioBlob = await res.blob();
+                const audioUrl = URL.createObjectURL(audioBlob);
+                const audio = new Audio(audioUrl);
+                await audio.play();
+              } catch (error) {
+                console.error("Failed to play audio:", error);
+              }
+            }}
+          >
             Speak
           </Button>
         </div>
