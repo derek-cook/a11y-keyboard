@@ -4,8 +4,6 @@ import { TextContainer } from "~/features/keyboard/TextContainer";
 import { Button } from "~/components/ui/button";
 import { useKeyboard } from "~/features/keyboard/KeyboardProvider";
 
-const audioContext = new AudioContext();
-
 export default function DocumentContainer() {
   const { text, setText } = useKeyboard();
 
@@ -17,6 +15,7 @@ export default function DocumentContainer() {
         body: JSON.stringify({ text }),
       });
       const audioBuffer = await res.arrayBuffer();
+      const audioContext = new AudioContext();
       const decodedData = await audioContext.decodeAudioData(audioBuffer);
       const source = audioContext.createBufferSource();
       source.buffer = decodedData;
