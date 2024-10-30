@@ -13,14 +13,14 @@ export async function POST(req: Request) {
   const response = await openai.audio.speech.create({
     model: "tts-1",
     voice: "nova",
-    response_format: "opus",
+    response_format: "mp3",
     input: text,
   });
 
   const buffer = Buffer.from(await response.arrayBuffer());
   return new Response(buffer, {
     headers: {
-      "Content-Type": "audio/ogg",
+      "Content-Type": "audio/mp3",
       "Transfer-Encoding": "chunked",
     },
   });
