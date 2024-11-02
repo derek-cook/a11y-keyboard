@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Providers } from "~/components/Providers";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Keyboard Home",
@@ -17,7 +18,10 @@ export default function RootLayout({
     <ClerkProvider>
       <Providers>
         <html lang="en" className={`${GeistSans.variable}`}>
-          <body>{children}</body>
+          <body>
+            {children}
+            <SpeedInsights />
+          </body>
         </html>
       </Providers>
     </ClerkProvider>
