@@ -1,5 +1,7 @@
 import OpenAI from "openai";
 
+export const runtime = "edge";
+
 const openai = new OpenAI();
 
 // Add type for request body
