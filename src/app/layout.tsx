@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { Providers } from "~/components/Providers";
 
 export const metadata: Metadata = {
   title: "Keyboard Home",
@@ -14,9 +15,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${GeistSans.variable}`}>
-        <body>{children}</body>
-      </html>
+      <Providers>
+        <html lang="en" className={`${GeistSans.variable}`}>
+          <body>{children}</body>
+        </html>
+      </Providers>
     </ClerkProvider>
   );
 }
