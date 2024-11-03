@@ -6,6 +6,10 @@ interface RequestBody {
   text: string;
 }
 
+export type GetTextCompletionResponse = {
+  choices: { message: { content: string } }[];
+};
+
 export async function POST(req: Request) {
   const { text } = (await req.json()) as RequestBody;
 

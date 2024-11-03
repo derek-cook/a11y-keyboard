@@ -1,18 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { type GetTextCompletionResponse } from "~/app/api/text-completion/route";
 import { useDebouncedValue } from "~/lib/hooks/useDebouncedValue";
-let done = false;
+
 export const useSuggestions = ({ text }: { text: string }) => {
   const debouncedText = useDebouncedValue(text, 1000);
 
-  const { data, refetch } = useQuery<{
+  const { data } = useQuery<{
     choices: { message: { content: string } }[];
   }>({
     queryKey: ["suggestions", debouncedText],
-    queryFn: async (): Promise<{
-      choices: { message: { content: string } }[];
-    }> =>
-      await fetch(`/api/text-completion`, {
+    queryFn: (): Promise<GetTextCompletionResponse> =>
+      fetch(`/api/text-completion`, {
         method: "POST",
         body: JSON.stringify({ text: debouncedText }),
       }).then((res) => res.json()),

@@ -4,7 +4,6 @@ import { Delete, Space, Speech } from "lucide-react";
 import { KeyButton } from "./KeyButton";
 import { useKeyboard } from "./KeyboardProvider";
 import { useSuggestions } from "./hooks/useSuggestions";
-import { Button } from "~/components/ui/button";
 
 export const Keyboard = () => {
   const { layout, mode, appendText, backspace, setMode, text } = useKeyboard();
@@ -14,14 +13,17 @@ export const Keyboard = () => {
     <div className="mx-auto flex w-full max-w-3xl grow flex-col justify-end p-1 pt-0">
       {suggestions.length > 0 && (
         <div className="flex max-h-32">
-          {suggestions.map((suggestion) => (
-            <KeyButton
-              key={suggestion}
-              text={suggestion}
-              value={suggestion}
-              onClick={() => appendText(suggestion)}
-            />
-          ))}
+          {suggestions.map(
+            (suggestion, i) =>
+              suggestion && (
+                <KeyButton
+                  key={i}
+                  text={suggestion}
+                  value={suggestion}
+                  onClick={() => appendText(suggestion)}
+                />
+              ),
+          )}
         </div>
       )}
       {layout.map((row, rowIndex) => (
