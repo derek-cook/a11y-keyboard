@@ -1,4 +1,10 @@
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 
@@ -45,29 +51,34 @@ export default function HomePage() {
           <UserButton />
         </div>
       </SignedIn>
-      <div className="container flex max-w-lg flex-col gap-2">
-        <h1 className="mb-1 text-5xl">
+      <div className="container flex max-w-lg flex-col items-start gap-2">
+        <h1 className="mb-1 text-7xl">
           Intellitype
           <span className="ml-4 rounded-full bg-blue-200 px-3 py-1 align-middle text-lg">
             beta
           </span>
         </h1>
-        <p className="mb-8 text-lg">A custom and accessible keyboard</p>
-        <div className="flex gap-4">
+        <p className="text-2xl">A custom and accessible keyboard.</p>
+        <div className="mt-6 flex items-end gap-4">
           <SignedIn>
-            <Button asChild>
+            <Button asChild variant="link">
               <Link href="/keyboards">My keyboards</Link>
             </Button>
           </SignedIn>
           <SignedOut>
             <Button asChild>
-              <SignInButton>Get started</SignInButton>
+              <SignUpButton>Get started</SignUpButton>
             </Button>
           </SignedOut>
           <Button asChild variant="link">
             <Link href="/about">Learn more</Link>
           </Button>
         </div>
+        <SignedOut>
+          <Button className="p-0 text-xs" variant="link" asChild>
+            <SignInButton>Already have a profile? Sign in</SignInButton>
+          </Button>
+        </SignedOut>
       </div>
     </main>
   );
