@@ -51,7 +51,7 @@ export default function DocumentContainer() {
             className="truncate text-2xl"
             onClick={handleSpeak}
           >
-            <audio ref={audioRef} src="" />
+            <audio ref={audioRef} />
             Speak
           </Button>
         </div>

@@ -61,7 +61,7 @@ export default function HomePage() {
         <p className="text-xl">A custom and accessible keyboard.</p>
         <div className="mt-6 flex items-end gap-4">
           <SignedIn>
-            <Button asChild variant="link">
+            <Button asChild>
               <Link href="/keyboards">My keyboards</Link>
             </Button>
           </SignedIn>
