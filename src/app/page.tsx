@@ -52,13 +52,13 @@ export default function HomePage() {
         </div>
       </SignedIn>
       <div className="container flex max-w-lg flex-col items-start gap-2">
-        <h1 className="mb-1 text-6xl">
+        <h1 className="mb-1 text-4xl md:text-6xl">
           Intellitype
-          <span className="ml-4 rounded-full bg-blue-200 px-3 py-1 align-middle text-lg">
+          <span className="ml-2 rounded-full bg-blue-200 px-3 py-1 align-middle text-sm md:text-lg">
             beta
           </span>
         </h1>
-        <p className="text-xl">A custom and accessible keyboard.</p>
+        <p className="text-md md:text-xl">A custom and accessible keyboard.</p>
         <div className="mt-6 flex items-end gap-4">
           <SignedIn>
             <Button asChild>
