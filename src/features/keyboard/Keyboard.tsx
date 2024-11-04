@@ -21,7 +21,7 @@ export const Keyboard = () => {
                   text={suggestion}
                   value={suggestion}
                   onClick={() => appendText(suggestion)}
-                  className="min-w-fit bg-gray-300 text-2xl md:text-3xl"
+                  className="min-w-fit whitespace-pre bg-gray-300 text-2xl underline md:text-3xl"
                   variant="outline"
                 />
               ),
