@@ -34,21 +34,21 @@ export default function DocumentContainer() {
 
   return (
     <div className="container flex h-dvh flex-col justify-between">
-      <div className="grid h-full max-h-48 grid-cols-5 gap-1 p-1">
+      <div className="grid grid-cols-5 gap-1 p-1">
         <div className="col-span-4 h-full">
           <TextContainer />
         </div>
         <div id="editor-actions" className="flex flex-col justify-start gap-1">
           <Button
             variant="destructive"
-            className="truncate text-2xl"
+            className="h-full truncate text-2xl"
             onClick={() => setText("")}
           >
             Clear
           </Button>
           <Button
             value={text}
-            className="truncate text-2xl"
+            className="h-full truncate text-2xl"
             onClick={handleSpeak}
           >
             <audio ref={audioRef} />

@@ -14,9 +14,10 @@ const processLogprobs = (response: OpenAI.Chat.Completions.ChatCompletion) => {
   const nextTopLogprobs =
     choices[0]?.logprobs?.content?.[0]?.top_logprobs.slice(1) ?? [];
 
-  const normalizedNextTopMessages = nextTopLogprobs.map((logprob) =>
-    logprob.token.trim().toLowerCase(),
-  );
+  const normalizedNextTopMessages = nextTopLogprobs
+    .map((logprob) => logprob.token.trim().toLowerCase())
+    .filter((value) => value.length > 1);
+
   const set = new Set<string>();
   const nextTopMessages = [];
   for (const message of normalizedNextTopMessages) {
@@ -25,6 +26,7 @@ const processLogprobs = (response: OpenAI.Chat.Completions.ChatCompletion) => {
       set.add(message);
     }
   }
+
   return [topMessage, ...nextTopMessages];
 };
 
