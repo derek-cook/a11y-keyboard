@@ -6,6 +6,31 @@ interface RequestBody {
   text: string;
 }
 
+export type GetTextCompletionResponse = string[];
+
+const processLogprobs = (response: OpenAI.Chat.Completions.ChatCompletion) => {
+  const { choices } = response;
+  const topMessage = choices[0]?.message.content ?? "";
+  const nextTopLogprobs =
+    choices[0]?.logprobs?.content?.[0]?.top_logprobs.slice(1) ?? [];
+
+  const normalizedNextTopMessages = nextTopLogprobs
+    .map((logprob) => logprob.token.trim().toLowerCase())
+    .filter((value) => value.length > 1);
+
+  const set = new Set<string>();
+  set.add(topMessage);
+  const nextTopMessages = [];
+  for (const message of normalizedNextTopMessages) {
+    if (!set.has(message)) {
+      nextTopMessages.push(message);
+      set.add(message);
+    }
+  }
+
+  return [topMessage, ...nextTopMessages];
+};
+
 export async function POST(req: Request) {
   const { text } = (await req.json()) as RequestBody;
 
@@ -22,10 +47,12 @@ export async function POST(req: Request) {
         content: text,
       },
     ],
-    temperature: 1,
-    n: 3,
-    max_completion_tokens: 10,
-    frequency_penalty: 0.5,
+    logprobs: true,
+    top_logprobs: 10,
+    n: 1,
+    max_completion_tokens: 2,
+    top_p: 0.1,
   });
-  return new Response(JSON.stringify(response));
+
+  return new Response(JSON.stringify(processLogprobs(response)));
 }
