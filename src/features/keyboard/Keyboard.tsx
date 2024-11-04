@@ -11,8 +11,8 @@ export const Keyboard = () => {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl grow flex-col justify-end p-1 pt-0">
-      {suggestions.length > 0 && mode === "ALPHA" && (
-        <div className="mb-1 flex h-full max-h-32 gap-1">
+      {mode === "ALPHA" && (
+        <div className="mb-1 flex h-24 gap-1">
           {suggestions.map(
             (suggestion, i) =>
               suggestion && (
@@ -21,7 +21,8 @@ export const Keyboard = () => {
                   text={suggestion}
                   value={suggestion}
                   onClick={() => appendText(suggestion)}
-                  className="min-w-fit text-2xl md:text-3xl"
+                  className="min-w-fit bg-gray-300 text-2xl md:text-3xl"
+                  variant="outline"
                 />
               ),
           )}

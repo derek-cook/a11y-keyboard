@@ -3,32 +3,30 @@ import { Keyboard } from "~/features/keyboard/Keyboard";
 import { TextContainer } from "~/features/keyboard/TextContainer";
 import { Button } from "~/components/ui/button";
 import { useKeyboard } from "~/features/keyboard/KeyboardProvider";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { Loader } from "lucide-react";
 
 export default function DocumentContainer() {
   const { text, setText } = useKeyboard();
+  const [isLoadingSpeech, setIsLoadingSpeech] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleSpeak = async () => {
     if (!text) return;
+    setIsLoadingSpeech(true);
     try {
       const res = await fetch("/api/text-to-speech", {
         method: "POST",
         body: JSON.stringify({ text }),
       });
       const audioBlob = await res.blob();
-      // const audioBuffer = await res.arrayBuffer();
-      // const audioContext = new AudioContext();
-      // const decodedData = await audioContext.decodeAudioData(audioBuffer);
-      // const source = audioContext.createBufferSource();
-      // source.buffer = decodedData;
-      // source.connect(audioContext.destination);
-      // source.start(0);
       const audioUrl = URL.createObjectURL(audioBlob);
       audioRef.current!.src = audioUrl;
       await audioRef.current?.play();
     } catch (error) {
       console.error("Failed to play audio:", error);
+    } finally {
+      setIsLoadingSpeech(false);
     }
   };
 
@@ -41,18 +39,19 @@ export default function DocumentContainer() {
         <div id="editor-actions" className="flex flex-col justify-start gap-1">
           <Button
             variant="destructive"
-            className="h-full truncate text-2xl"
+            className="h-full truncate text-lg md:text-2xl"
             onClick={() => setText("")}
           >
             Clear
           </Button>
           <Button
+            disabled={isLoadingSpeech}
             value={text}
-            className="h-full truncate text-2xl"
+            className="h-full truncate text-lg md:text-2xl"
             onClick={handleSpeak}
           >
             <audio ref={audioRef} />
-            Speak
+            {isLoadingSpeech ? <Loader className="animate-spin" /> : "Speak"}
           </Button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { cn } from "~/lib/utils";
-import { Button } from "../../components/ui/button";
+import { Button, type ButtonProps } from "../../components/ui/button";
 
 interface KeyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
@@ -10,7 +10,9 @@ export const KeyButton = ({
   className = "",
   children,
   ...rest
-}: KeyButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+}: KeyButtonProps &
+  ButtonProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <Button
       className={cn(

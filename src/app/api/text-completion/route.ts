@@ -16,7 +16,8 @@ const processLogprobs = (response: OpenAI.Chat.Completions.ChatCompletion) => {
 
   const normalizedNextTopMessages = nextTopLogprobs
     .map((logprob) => logprob.token.trim().toLowerCase())
-    .filter((value) => value.length > 1);
+    .filter((value) => value.length > 1)
+    .filter((value) => /^[a-zA-Z]+$/.test(value)); // a few results have tokens like <|end|> in it. I could probably handle that to mean the sentence should end with a "."
 
   const set = new Set<string>();
   set.add(topMessage);
