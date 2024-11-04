@@ -19,6 +19,7 @@ const processLogprobs = (response: OpenAI.Chat.Completions.ChatCompletion) => {
     .filter((value) => value.length > 1);
 
   const set = new Set<string>();
+  set.add(topMessage);
   const nextTopMessages = [];
   for (const message of normalizedNextTopMessages) {
     if (!set.has(message)) {
