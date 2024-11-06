@@ -5,6 +5,7 @@ const isPublicRoute = createRouteMatcher([
   "/",
   "/about",
   "/api/text-completion",
+  "/keyboards/default",
 ]);
 
 export default clerkMiddleware(async (auth, req, context) => {

@@ -8,41 +8,6 @@ import {
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 
-// classic top nav
-// export default function HomePage() {
-//   return (
-//     <div className="min-h-screen">
-//       <nav className="mx-auto mt-10 flex w-full max-w-2xl items-center justify-between p-4">
-//         <div id="left-nav">
-//           <Link className="text-lg font-semibold text-blue-950" href="/">
-//             Keyboard
-//           </Link>
-//         </div>
-//         <div id="right-nav">
-//           <SignedOut>
-//             <Button>
-//               <SignInButton />
-//             </Button>
-//           </SignedOut>
-//           <SignedIn>
-//             <Button>
-//               <UserButton />
-//             </Button>
-//           </SignedIn>
-//         </div>
-//       </nav>
-//       <main className="flex flex-col justify-center">
-//         <SignedIn>
-//           <h1></h1>
-//           <Link href="/doc" target="_blank">
-//             Document
-//           </Link>
-//         </SignedIn>
-//       </main>
-//     </div>
-//   );
-// }
-
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
@@ -69,16 +34,23 @@ export default function HomePage() {
             <Button asChild>
               <SignUpButton>Get started</SignUpButton>
             </Button>
+            <Button className="p-0 text-xs" variant="link" asChild>
+              <SignInButton>Already have a profile? Sign in</SignInButton>
+            </Button>
           </SignedOut>
-          <Button asChild variant="link">
+        </div>
+      </div>
+      <div className="absolute bottom-48 flex w-full justify-center gap-3">
+        <div>
+          <Button asChild variant="ghost">
             <Link href="/about">Learn more</Link>
           </Button>
         </div>
-        <SignedOut>
-          <Button className="p-0 text-xs" variant="link" asChild>
-            <SignInButton>Already have a profile? Sign in</SignInButton>
+        <div>
+          <Button asChild variant="ghost">
+            <Link href="/keyboards/default">Demo</Link>
           </Button>
-        </SignedOut>
+        </div>
       </div>
     </main>
   );
