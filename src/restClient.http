@@ -1,0 +1,10 @@
+@baseUrl = http://localhost:3000/api
+
+
+POST {{baseUrl}}/text-completion
+content-type: application/json
+
+
+{
+  "text": "hello how "
+}

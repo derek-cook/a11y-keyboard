@@ -13,7 +13,7 @@ export default function KeyboardsPage() {
         </div>
         <div id="right-nav">
           <SignedOut>
-            <Button>
+            <Button asChild>
               <SignInButton />
             </Button>
           </SignedOut>

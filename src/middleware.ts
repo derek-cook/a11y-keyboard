@@ -1,6 +1,17 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { rateLimiterMiddleware } from "./server/middleware/rateLimiter";
 
-export default clerkMiddleware();
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/about",
+  "/api/text-completion",
+]);
+
+export default clerkMiddleware(async (auth, req, context) => {
+  if (!isPublicRoute(req)) await auth.protect();
+
+  return rateLimiterMiddleware(req, context);
+});
 
 export const config = {
   matcher: [
@@ -8,6 +19,5 @@ export const config = {
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
     // Always run for API routes
     "/(api|trpc)(.*)",
-    "/keyboards",
   ],
 };
