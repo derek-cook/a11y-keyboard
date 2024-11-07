@@ -40,7 +40,7 @@ export default function HomePage() {
           </SignedOut>
         </div>
       </div>
-      <div className="absolute bottom-18 flex w-full justify-center gap-3">
+      <div className="relative bottom-18 flex w-full justify-center gap-3">
         <div>
           <Button asChild variant="ghost">
             <Link href="/about">Learn more</Link>
