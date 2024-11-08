@@ -5,6 +5,7 @@ const isPublicRoute = createRouteMatcher([
   "/",
   "/about",
   "/api/text-completion",
+  "/api/text-to-speech",
   "/keyboards/default",
 ]);
 
