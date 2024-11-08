@@ -10,13 +10,13 @@ import { Button } from "~/components/ui/button";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
+    <main className="flex min-h-svh flex-col items-center justify-center p-8">
       <SignedIn>
         <div className="fixed right-3 top-3">
           <UserButton />
         </div>
       </SignedIn>
-      <div className="container flex max-w-lg flex-col items-start gap-2">
+      <div className="container flex max-w-lg grow flex-col items-start justify-end gap-2">
         <h1 className="mb-1 text-4xl md:text-6xl">
           Intellitype
           <span className="ml-2 rounded-full bg-blue-200 px-3 py-1 align-middle text-sm md:text-lg">
@@ -40,7 +40,7 @@ export default function HomePage() {
           </SignedOut>
         </div>
       </div>
-      <div className="relative bottom-18 flex w-full justify-center gap-3">
+      <div className="flex w-full grow items-end justify-center gap-3">
         <div>
           <Button asChild variant="ghost">
             <Link href="/about">Learn more</Link>
