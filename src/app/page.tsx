@@ -10,7 +10,7 @@ import { Button } from "~/components/ui/button";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-svh flex-col items-center justify-center p-8">
+    <main className="flex h-svh flex-col items-center justify-center p-8">
       <SignedIn>
         <div className="fixed right-3 top-3">
           <UserButton />
