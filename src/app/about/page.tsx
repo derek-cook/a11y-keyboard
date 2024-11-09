@@ -1,4 +1,10 @@
-import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
+import {
+  SignedOut,
+  SignInButton,
+  SignedIn,
+  UserButton,
+  SignUpButton,
+} from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 
@@ -11,9 +17,12 @@ export default function AboutPage() {
             Intellitype
           </Link>
         </div>
-        <div id="right-nav">
+        <div id="right-nav" className="flex justify-end gap-2">
           <SignedOut>
             <Button asChild>
+              <SignUpButton>Get started</SignUpButton>
+            </Button>
+            <Button asChild variant="outline">
               <SignInButton />
             </Button>
           </SignedOut>
@@ -22,20 +31,20 @@ export default function AboutPage() {
           </SignedIn>
         </div>
       </nav>
-      <main className="flex max-w-xl flex-col gap-4 p-6">
+      <main className="flex max-w-xl flex-col gap-3 p-6 pt-0">
         <h1 className="sr-only">About</h1>
-        <div className="my-4 flex flex-col gap-3">
+        <div className="my-3 flex flex-col gap-3">
           <h2 className="text-4xl">The Problem</h2>
           <p>
-            For disabled individuals, there are many accessibility tools and
-            devices available. However, they are not always intuitive or
-            immediately accessible.
+            For disabled individuals, there are many accessibility tools
+            available. Unfortunately, they are not always intuitive or readily
+            usable.
           </p>
           <p>
-            Consider iOS has Accessibility Options. Although very powerful, it
-            has a steep learning curve and may take some time to onboard. It
-            also targets broad disabilities which may not be helpful for
-            specific users&apos; conditions.
+            Consider iOS which has Accessibility Options. Although very
+            powerful, it has a steep learning curve and may take some time to
+            onboard. It also targets broad disabilities which may not be helpful
+            for specific users&apos; conditions.
           </p>
           <p>
             The devices and software for more specific conditions are often
@@ -53,7 +62,7 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="my-4 flex flex-col gap-3">
+        <div className="my-3 flex flex-col gap-2">
           <h2 className="text-xl font-semibold">Potential features</h2>
           <ul className="list-inside list-disc">
             <li>Customizable keyboard layout</li>
