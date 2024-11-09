@@ -12,7 +12,7 @@ export const Keyboard = () => {
   return (
     <div className="mx-auto flex w-full max-w-3xl grow flex-col justify-end p-1 pt-0">
       {mode === "ALPHA" && (
-        <div className="mb-1 flex h-24 gap-1">
+        <div className="mb-1 flex max-h-24 min-h-16 grow gap-1">
           {suggestions.map(
             (suggestion, i) =>
               suggestion && (
