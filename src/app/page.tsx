@@ -17,25 +17,30 @@ export default function HomePage() {
         </div>
       </SignedIn>
       <div className="container flex max-w-lg grow flex-col items-start justify-end">
-        <h1 className="mb-3 text-5xl md:text-6xl">
+        <h1 className="mb-4 text-5xl md:text-6xl">
           Intellitype
           <span className="ml-2 rounded-full bg-blue-200 px-3 py-1 align-middle text-sm md:text-lg">
             beta
           </span>
         </h1>
-        <p className="text-md mb-8 md:text-xl">
+        <p className="text-md mb-4 font-medium md:text-xl">
           A quick and accessible keyboard for those with motor, visual, or
           verbal impairments.
         </p>
-        <p className="text-sm">Featuring text-to-speech and predictive text.</p>
-        <p className="mb-4 text-sm underline">
-          <Link
-            href="https://github.com/derek-cook/a11y-keyboard"
-            target="_blank"
-          >
-            Open source.
-          </Link>
-        </p>
+        <ul className="mb-4 flex list-inside list-disc flex-col gap-1 text-sm">
+          <li>text-to-speech</li>
+          <li>predictive text</li>
+          <li>
+            Free and{" "}
+            <Link
+              className="underline"
+              href="https://github.com/derek-cook/a11y-keyboard"
+              target="_blank"
+            >
+              open source
+            </Link>
+          </li>
+        </ul>
         <div className="mt-6 flex items-start gap-4">
           <SignedIn>
             <Button size="lg" asChild>
