@@ -16,26 +16,38 @@ export default function HomePage() {
           <UserButton />
         </div>
       </SignedIn>
-      <div className="container flex max-w-lg grow flex-col items-start justify-end gap-2">
-        <h1 className="mb-1 text-4xl md:text-6xl">
+      <div className="container flex max-w-lg grow flex-col items-start justify-end">
+        <h1 className="mb-3 text-5xl md:text-6xl">
           Intellitype
           <span className="ml-2 rounded-full bg-blue-200 px-3 py-1 align-middle text-sm md:text-lg">
             beta
           </span>
         </h1>
-        <p className="text-md md:text-xl">A custom and accessible keyboard.</p>
-        <div className="mt-6 flex items-end gap-4">
+        <p className="text-md mb-8 md:text-xl">
+          A quick and accessible keyboard for those with motor, visual, or
+          verbal impairments.
+        </p>
+        <p className="text-sm">Featuring text-to-speech and predictive text.</p>
+        <p className="mb-4 text-sm underline">
+          <Link
+            href="https://github.com/derek-cook/a11y-keyboard"
+            target="_blank"
+          >
+            Open source.
+          </Link>
+        </p>
+        <div className="mt-6 flex items-start gap-4">
           <SignedIn>
-            <Button asChild>
+            <Button size="lg" asChild>
               <Link href="/keyboards">My keyboards</Link>
             </Button>
           </SignedIn>
           <SignedOut>
-            <Button asChild>
+            <Button size="lg" asChild>
               <SignUpButton>Get started</SignUpButton>
             </Button>
-            <Button className="p-0 text-xs" variant="link" asChild>
-              <SignInButton>Already have a profile? Sign in</SignInButton>
+            <Button size="lg" variant="outline" asChild>
+              <SignInButton>Sign in</SignInButton>
             </Button>
           </SignedOut>
         </div>

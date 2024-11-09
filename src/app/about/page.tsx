@@ -7,8 +7,8 @@ export default function AboutPage() {
     <div className="container mx-auto flex min-h-screen w-full max-w-4xl flex-col items-center">
       <nav className="mx-auto flex w-full items-center justify-between p-6">
         <div id="left-nav">
-          <Link className="text-lg font-semibold text-blue-950" href="/">
-            Keyboard
+          <Link className="text-lg font-semibold" href="/">
+            Intellitype
           </Link>
         </div>
         <div id="right-nav">
