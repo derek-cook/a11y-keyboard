@@ -63,10 +63,25 @@ export default function AboutPage() {
         </div>
 
         <div className="my-3 flex flex-col gap-2">
+          <h2 className="text-xl font-semibold">Current features</h2>
+          <ul className="list-inside list-disc">
+            <li>Predictive text</li>
+            <li>Text-to-speech</li>
+            <li>
+              Alphabetical layout (when qwerty is is too wide for the user)
+            </li>
+            <li>Large buttons for better motor and visual usability</li>
+            <li>Frequent word bank mode for single-keystroke words</li>
+            <li>Removed unhelpful keys that take up space</li>
+          </ul>
+        </div>
+
+        <div className="my-3 flex flex-col gap-2">
           <h2 className="text-xl font-semibold">Potential features</h2>
           <ul className="list-inside list-disc">
             <li>Customizable keyboard layout</li>
-            <li>Auto-suggestions</li>
+            <li>Improved predictive text</li>
+            <li>Local LLM for speed and offline usage</li>
             <li>Integrate with built-in OS keyboard</li>
             <li>Enable cross-application usage</li>
           </ul>
