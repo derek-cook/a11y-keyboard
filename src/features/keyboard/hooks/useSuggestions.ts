@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { type GetTextCompletionResponse } from "~/app/api/text-completion/route";
-import { useDebouncedValue } from "~/lib/hooks/useDebouncedValue";
+import { useDebouncedValue } from "~/features/keyboard/hooks/useDebouncedValue";
 
 export const useSuggestions = ({ text }: { text: string }) => {
   const debouncedText = useDebouncedValue(text, 1000);

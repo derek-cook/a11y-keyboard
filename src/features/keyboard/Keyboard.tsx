@@ -4,12 +4,12 @@ import { Delete, Space, Speech } from "lucide-react";
 import { KeyButton } from "./KeyButton";
 import { useKeyboard } from "./KeyboardProvider";
 import { useSuggestions } from "./hooks/useSuggestions";
-import { useTextPrediction } from "./hooks/useTextPrediction";
+import { useTextPredictionLocal } from "./hooks/useTextPredictionLocal";
 
 export const Keyboard = () => {
   const { layout, mode, appendText, backspace, setMode, text } = useKeyboard();
   const { suggestions } = useSuggestions({ text });
-  const { result } = useTextPrediction({ text });
+  const { result } = useTextPredictionLocal({ text });
   return (
     <div className="mx-auto flex w-full max-w-3xl grow flex-col justify-end p-1 pt-0">
       {mode === "ALPHA" && (

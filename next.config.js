@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /** @type {import("next").NextConfig} */
-const config = {
+const nextConfig = {
   webpack: (config) => {
     config.resolve.alias["@huggingface/transformers"] = path.resolve(
       __dirname,
@@ -33,4 +33,4 @@ const config = {
   },
 };
 
-export default config;
+export default nextConfig;

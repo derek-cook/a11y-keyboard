@@ -1,16 +1,14 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { useDebouncedValue } from "~/lib/hooks/useDebouncedValue";
+import { useDebouncedValue } from "~/features/keyboard/hooks/useDebouncedValue";
 
-export const useTextPrediction = ({ text }: { text: string }) => {
+export const useTextPredictionLocal = ({ text }: { text: string }) => {
   const debouncedText = useDebouncedValue(text, 1000);
   const [result, setResult] = useState("");
   const workerRef = useRef<Worker | null>(null);
 
   useEffect(() => {
-    const worker = new Worker(
-      new URL("../../../app/workers/worker.ts", import.meta.url),
-    );
+    const worker = new Worker(new URL("~/workers/worker.ts", import.meta.url));
     workerRef.current = worker;
 
     worker.onmessage = (
@@ -37,6 +35,7 @@ export const useTextPrediction = ({ text }: { text: string }) => {
 
   useEffect(() => {
     if (debouncedText) {
+      console.log({ debouncedText });
       generateText(debouncedText);
     }
   }, [debouncedText]);
