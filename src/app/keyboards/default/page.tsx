@@ -15,9 +15,6 @@ export default function DocumentContainer() {
     if (!text) return;
     setIsLoadingSpeech(true);
     try {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/06220ab5-05b5-4a70-94a2-6520c341cfdf',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:18',message:'Client fetch start',data:{method:'POST',url:'/api/text-to-speech',textLength:text.length},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'A'})}).catch(()=>{/* ignore */});
-      // #endregion
       const res = await fetch("/api/text-to-speech", {
         method: "POST",
         headers: {
@@ -25,17 +22,11 @@ export default function DocumentContainer() {
         },
         body: JSON.stringify({ text }),
       });
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/06220ab5-05b5-4a70-94a2-6520c341cfdf',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:22',message:'Client fetch response',data:{status:res.status,statusText:res.statusText,ok:res.ok,headers:Object.fromEntries(res.headers.entries())},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'A'})}).catch(()=>{/* ignore */});
-      // #endregion
       const audioBlob = await res.blob();
       const audioUrl = URL.createObjectURL(audioBlob);
       audioRef.current!.src = audioUrl;
       await audioRef.current?.play();
     } catch (error) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/06220ab5-05b5-4a70-94a2-6520c341cfdf',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:27',message:'Client fetch error',data:{error:error instanceof Error?error.message:String(error),errorName:error instanceof Error?error.name:'unknown'},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'A'})}).catch(()=>{/* ignore */});
-      // #endregion
       console.error("Failed to play audio:", error);
     } finally {
       setIsLoadingSpeech(false);
