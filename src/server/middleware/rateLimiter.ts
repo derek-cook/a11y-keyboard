@@ -18,7 +18,7 @@ export const rateLimiterMiddleware: NextMiddleware = async (
   request,
   context,
 ) => {
-  if (!isRateLimitedRoute(request)) return NextResponse.next();
+  if (!isRateLimitedRoute(request) || process.env.NODE_ENV === "development") return NextResponse.next();
 
   const ip = ipAddress(request);
   if (!ip) return NextResponse.json({ error: "IP not found" }, { status: 403 });
