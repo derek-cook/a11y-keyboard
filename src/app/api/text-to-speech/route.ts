@@ -19,11 +19,33 @@ export async function POST(req: Request) {
     input: text,
   });
 
-  const buffer = Buffer.from(await response.arrayBuffer());
-  return new Response(buffer, {
+  console.log({ response });
+
+  const arrayBuffer = await response.arrayBuffer();
+  return new Response(arrayBuffer, {
     headers: {
       "Content-Type": "audio/mp3",
-      "Transfer-Encoding": "chunked",
+    },
+  });
+}
+
+// Catch-all for other methods to debug 405 errors
+export async function GET() {
+  return new Response("Method not allowed. Use POST.", { status: 405 });
+}
+
+export async function PUT() {
+  return new Response("Method not allowed. Use POST.", { status: 405 });
+}
+
+// Handle OPTIONS for CORS preflight requests (common in production)
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
     },
   });
 }
